@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Sider {
+  color: white;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+}
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: rgba(28, 17, 41, 0.88);
+}
+
+.menu {
+  height: 92vh;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1.5rem;
+}
+
+.themat {
+  width: 10px !important;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hamburguer {
+  margin-left: 20px;
+  font-size: 20px;
+}
+.modal {
+  width: 800px !important;
+}
+
+.Space {
+  height: 450px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.input {
+  width: 500px !important;
+  height: 50px !important;
+}
+
+.Inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px !important;
+  position: relative;
+}
