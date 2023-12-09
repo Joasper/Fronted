@@ -1,10 +1,27 @@
 import { Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSystemEstudiante } from "../Hooks/useSystemEstudiantes";
 import AnadirEstudiante from "../../Components/AnadirEstudiante";
+import { MdManageAccounts } from "react-icons/md";
+import AccionesEstudiantes from "../../Components/AccionesEstudiante";
+import { useDispatch } from "react-redux";
+import { GetEstudianteActivo } from "../Store/Estudiante/EstudianteSlice";
 
 export const Estudiante = () => {
+  const dispatch = useDispatch();
   const { startGetEstudent, Estudiantes } = useSystemEstudiante();
+  const [Open, setOpen] = useState(false);
+
+  const AbrirModal = (es) => {
+    setOpen(true);
+    dispatch(GetEstudianteActivo(es));
+    console.log(es);
+  };
+
+  const CerrarModal = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     startGetEstudent();
   }, []);
@@ -45,11 +62,33 @@ export const Estudiante = () => {
       title: "ESTADO",
       dataIndex: "Estado",
     },
+    {
+      key: "Acciones",
+      title: "ACCIONES",
+      render: (text, record) => {
+        return (
+          <MdManageAccounts
+            className="icon-estu"
+            onClick={() => AbrirModal(text)}
+          />
+        );
+      },
+    },
   ];
+
+  const ManejarEstudiante = (es) => {
+    console.log(es);
+  };
 
   return (
     <h1>
       <AnadirEstudiante />
+      <AccionesEstudiantes
+        open={Open}
+        AbrirModal={AbrirModal}
+        CerrarModal={CerrarModal}
+      />
+
       <Table
         columns={Columns}
         size={"large"}

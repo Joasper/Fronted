@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   DatePicker,
@@ -7,6 +7,7 @@ import {
   Modal,
   Select,
   Space,
+  Tabs,
   Typography,
 } from "antd";
 import { Forma } from "./Form";
@@ -16,18 +17,13 @@ const init = {
   Nombre: "",
 };
 
-const AnadirEstudiante = () => {
-  const { startCreateStudent } = useSystemEstudiante();
-  const [open, setOpen] = useState(false);
+const AccionesEstudiantes = ({ open, AbrirModal, CerrarModal }) => {
+  const { startCreateStudent, EstudianteActivo } = useSystemEstudiante();
+  const [data, setdata] = useState(EstudianteActivo);
+  console.log(data);
+
   const [form] = Form.useForm();
   // const { Nombre, onInputChange, formState } = useForm(init);
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-  };
 
   const onFinish = (values) => {
     console.log(values);
@@ -48,33 +44,23 @@ const AnadirEstudiante = () => {
     form.resetFields();
   };
 
-  return (
-    <>
-      <div className="box-btn">
-        <Button
-          type="primary"
-          onClick={showModal}
-          className="AgregarEstudiante"
-        >
-          Agregar Estudiante
-        </Button>
-      </div>
+  useEffect(() => {
+    console.log(EstudianteActivo);
+    if (EstudianteActivo) {
+      form.setFieldsValue({
+        FirstName: data?.Nombre,
+        FirstApellido: EstudianteActivo?.Apellido,
+        FirstSexo: EstudianteActivo?.Sexo,
+      });
+    }
+  }, []);
 
-      <Modal
-        open={open}
-        title="Añadir Estudiante"
-        onCancel={handleCancel}
-        className="modal"
-        footer={[
-          <Button key="back" onClick={handleCancel} danger>
-            Cancelar
-          </Button>,
-          <Button type="primary" form="myForm" htmlType="submit" key="submit">
-            Crear
-          </Button>,
-        ]}
-      >
-        <Space className="Space">
+  const items = [
+    {
+      key: "1",
+      label: "Editar Estudiante",
+      children: (
+        <div className="formbox">
           <Form
             form={form}
             onFinish={onFinish}
@@ -132,9 +118,34 @@ const AnadirEstudiante = () => {
               </div>
             </div>
           </Form>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <Modal
+        open={open}
+        title="Manejo de Estudiantes"
+        onCancel={CerrarModal}
+        className="modal accionesmodal"
+        footer={[
+          <Button key="back" onClick={CerrarModal} danger>
+            Cancelar
+          </Button>,
+          <Button type="primary" form="myForm" htmlType="submit" key="submit">
+            Crear
+          </Button>,
+        ]}
+      >
+        <Space className="Space Acciones">
+          <div className="tabs-content">
+            <Tabs className="Tabs" items={items} />
+          </div>
         </Space>
       </Modal>
     </>
   );
 };
-export default AnadirEstudiante;
+export default AccionesEstudiantes;

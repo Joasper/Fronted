@@ -17,6 +17,24 @@ export const useSystemEstudiante = () => {
     }
   };
 
+  const startCreateStudent = async (data, fecha) => {
+    console.log({ data, fecha });
+
+    try {
+      const res = await BD.post("/estudiante", {
+        Apellido: data.FirstApellido,
+        Nombre: data.FirstName,
+        FechaNacimeinto: fecha,
+        Sexo: data.FirstSexo,
+        Estado: data.FirstEstadoe,
+      });
+      startGetEstudent();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     //*PROPIEDADES
     Estudiantes,
@@ -26,5 +44,6 @@ export const useSystemEstudiante = () => {
 
     //*METODOS
     startGetEstudent,
+    startCreateStudent,
   };
 };

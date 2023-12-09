@@ -15,7 +15,10 @@ export const EstudianteSlice = createSlice({
     GetStudents: (state, { payload }) => {
       state.Estudiantes = payload;
     },
+    GetEstudianteActivo: (state, { payload }) => {
+      state.EstudianteActivo = payload;
+    },
   },
 });
 
-export const { GetStudents } = EstudianteSlice.actions;
+export const { GetStudents, GetEstudianteActivo } = EstudianteSlice.actions;

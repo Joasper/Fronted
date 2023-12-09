@@ -50,6 +50,9 @@
 .modal {
   width: 800px !important;
 }
+.accionesmodal {
+  width: 400px !important;
+}
 
 .Space {
   height: 450px !important;
@@ -67,4 +70,52 @@
   flex-direction: column;
   gap: 10px !important;
   position: relative;
+}
+.AgregarEstudiante {
+  width: 170px !important;
+  height: 40px !important;
+}
+.box-btn {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.icon-estu {
+  font-size: 22px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.icon-estu:hover {
+  color: blue;
+}
+
+.accionesmodal {
+  width: 800px !important;
+}
+
+.Acciones {
+  height: auto !important;
+  width: 100px !important;
+  margin-bottom: 100px !important;
+}
+
+.Tabs {
+  display: flex;
+  justify-content: space-between !important;
+}
+
+.tabs-content {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.formbox {
+  height: auto !important;
+  width: 300px !important;
 }
