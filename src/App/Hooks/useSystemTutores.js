@@ -40,6 +40,31 @@ export const useSystemTutores = () => {
     }
   };
 
+  const startActualizarTutor = async (data, id) => {
+    console.log({ data, id, EstudiantesAgregador });
+    const idsEstudiantes = EstudiantesAgregador.map((e) => {
+      return e._id;
+    });
+    console.log({ idsEstudiantes });
+
+    try {
+      const res = await BD.put(`/tutores/${id}`, {
+        Cedula: data?.FirstCedula,
+        Nombre: data?.FirstName,
+        Apellido: data?.FirstApellido,
+        Correo: data?.FirstCorreo,
+        Telefono: data?.FirstTelefono,
+        Estudiantes: idsEstudiantes,
+        Activo: data?.FirstEstado === "Activo" ? true : false,
+      });
+
+      startGetTutores();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     //*PROPIEDADES
     Tutores,
@@ -48,5 +73,6 @@ export const useSystemTutores = () => {
     //*METODOS
     startGetTutores,
     CrearTutorEstudiante,
+    startActualizarTutor,
   };
 };

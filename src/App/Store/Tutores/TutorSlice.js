@@ -22,8 +22,15 @@ export const TutorSlice = createSlice({
         (e) => e._id != payload._id
       );
     },
+    LimpiarEstudiantes: (state, { payload }) => {
+      state.EstudiantesAgregador = [];
+    },
   },
 });
 
-export const { GetTutores, AgregarEstudiantes, EliminarEstudiantes } =
-  TutorSlice.actions;
+export const {
+  GetTutores,
+  AgregarEstudiantes,
+  EliminarEstudiantes,
+  LimpiarEstudiantes,
+} = TutorSlice.actions;

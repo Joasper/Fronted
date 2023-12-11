@@ -152,7 +152,7 @@
 .tableStudent {
   margin-top: 100px !important;
   position: relative !important;
-  left: 90px !important;
+  left: 50px !important;
 }
 
 .tableTrue {
@@ -167,4 +167,11 @@
   cursor: pointer;
   position: relative;
   left: 20px !important;
+}
+
+.space-table {
+  position: relative;
+  bottom: 56px !important;
+  right: 20px !important;
+  height: 200px !important;
 }
