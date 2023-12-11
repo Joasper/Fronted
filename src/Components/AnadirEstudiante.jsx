@@ -64,7 +64,7 @@ const AnadirEstudiante = () => {
         open={open}
         title="Añadir Estudiante"
         onCancel={handleCancel}
-        className="modal"
+        className="modal estudiante"
         footer={[
           <Button key="back" onClick={handleCancel} danger>
             Cancelar

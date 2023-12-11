@@ -48,9 +48,17 @@
   font-size: 20px;
 }
 .modal {
-  width: 00px !important;
+  width: 1100px !important;
 }
-.tutores-modal {
+
+.ver {
+  width: 730px !important;
+}
+
+.estudiante {
+  width: 800px !important;
+}
+.icon-estu:hoverres-modal {
   width: 1100px !important;
 }
 .accionesmodal {
@@ -174,4 +182,9 @@
   bottom: 56px !important;
   right: 20px !important;
   height: 200px !important;
+}
+
+.modal-table-ver {
+  position: relative;
+  bottom: 80px !important;
 }

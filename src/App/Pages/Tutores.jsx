@@ -10,11 +10,13 @@ import {
   AgregarEstudiantes,
   LimpiarEstudiantes,
 } from "../Store/Tutores/TutorSlice";
+import VerEstudiantes from "../../Components/VerEstudiantes";
 
 export const Tutores = () => {
   const dispatch = useDispatch();
   const { startGetTutores, Tutores } = useSystemTutores();
   const [Open, setOpen] = useState(false);
+  const [Modal, setModal] = useState(false);
   const [User, setUser] = useState("");
   const AbrirModal = (es) => {
     console.log(es);
@@ -29,6 +31,21 @@ export const Tutores = () => {
 
   const CerrarModal = () => {
     setOpen(false);
+    dispatch(LimpiarEstudiantes());
+  };
+  const AbrirModal2 = (es) => {
+    console.log(es);
+    for (const iterator of es.Estudiantes) {
+      console.log(iterator);
+      dispatch(AgregarEstudiantes(iterator));
+    }
+    // dispatch(AgregarEstudiantes(es.Estudiantes));
+    setUser(es);
+    setModal(true);
+  };
+
+  const CerrarModal2 = () => {
+    setModal(false);
     dispatch(LimpiarEstudiantes());
   };
 
@@ -75,7 +92,9 @@ export const Tutores = () => {
       key: "Estudiante",
       title: "ESTUDIANTES",
       render: (text, record) => {
-        return <IoEyeSharp className="icon-estu" />;
+        return (
+          <IoEyeSharp className="icon-estu" onClick={() => AbrirModal2(text)} />
+        );
       },
     },
 
@@ -100,6 +119,12 @@ export const Tutores = () => {
         open={Open}
         AbrirModal={AbrirModal}
         CerrarModal={CerrarModal}
+      />
+      <VerEstudiantes
+        open={Modal}
+        user={User}
+        AbrirModal={AbrirModal2}
+        CerrarModal={CerrarModal2}
       />
       <Table
         size={"large"}
