@@ -50,6 +50,9 @@
 .modal {
   width: 800px !important;
 }
+.tutores-modal {
+  width: 1000px !important;
+}
 .accionesmodal {
   width: 400px !important;
 }
@@ -98,6 +101,10 @@
   width: 800px !important;
 }
 
+.formtab {
+  margin-bottom: 120px !important;
+}
+
 .Acciones {
   height: auto !important;
   width: 100px !important;
@@ -118,4 +125,38 @@
 .formbox {
   height: auto !important;
   width: 300px !important;
+}
+
+.spacetutor {
+  height: 350px !important;
+}
+
+.ant-select-selection-item {
+  color: black !important;
+  font-weight: 800;
+}
+
+#Form_FirstFechaEstudiante {
+  color: black !important;
+  font-weight: bold;
+}
+
+.Space-Item2 {
+  height: 590px !important;
+}
+.Space-heiht {
+  height: 100px !important;
+  padding-bottom: 180px !important;
+}
+
+.tableStudent {
+  margin-top: 100px !important;
+  position: relative !important;
+  left: 130px !important;
+}
+
+.tableTrue {
+  position: relative !important;
+  bottom: 230px !important;
+  left: 130px !important;
 }

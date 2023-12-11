@@ -35,6 +35,23 @@ export const useSystemEstudiante = () => {
     }
   };
 
+  const startActualizarEstudiante = async (id, data, fecha) => {
+    console.log({ id, data, fecha });
+    try {
+      const res = await BD.put(`/estudiante/${id}`, {
+        Apellido: data.FirstApellido,
+        Nombre: data.FirstName,
+        FechaNacimeinto: fecha,
+        Sexo: data.FirstSexo,
+        Estado: data.FirstEstadoe,
+      });
+      console.log(res);
+      startGetEstudent();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     //*PROPIEDADES
     Estudiantes,
@@ -45,5 +62,6 @@ export const useSystemEstudiante = () => {
     //*METODOS
     startGetEstudent,
     startCreateStudent,
+    startActualizarEstudiante,
   };
 };

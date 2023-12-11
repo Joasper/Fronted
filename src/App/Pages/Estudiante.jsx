@@ -11,9 +11,11 @@ export const Estudiante = () => {
   const dispatch = useDispatch();
   const { startGetEstudent, Estudiantes } = useSystemEstudiante();
   const [Open, setOpen] = useState(false);
+  const [user, setuser] = useState("");
 
   const AbrirModal = (es) => {
     setOpen(true);
+    setuser(es);
     dispatch(GetEstudianteActivo(es));
     console.log(es);
   };
@@ -87,6 +89,7 @@ export const Estudiante = () => {
         open={Open}
         AbrirModal={AbrirModal}
         CerrarModal={CerrarModal}
+        usuario={user}
       />
 
       <Table

@@ -12,15 +12,20 @@ import {
 } from "antd";
 import { Forma } from "./Form";
 import { useSystemEstudiante } from "../App/Hooks/useSystemEstudiantes";
+import dayjs from "dayjs";
 //import { useForm } from "../App/Hooks/useForm";
 const init = {
   Nombre: "",
 };
 
-const AccionesEstudiantes = ({ open, AbrirModal, CerrarModal }) => {
-  const { startCreateStudent, EstudianteActivo } = useSystemEstudiante();
+const AccionesEstudiantes = ({ open, AbrirModal, CerrarModal, usuario }) => {
+  const { startCreateStudent, EstudianteActivo, startActualizarEstudiante } =
+    useSystemEstudiante();
   const [data, setdata] = useState(EstudianteActivo);
   console.log(data);
+  console.log(usuario);
+  const fecha = usuario?.FechaNacimeinto?.substring(0, 10);
+  console.log(fecha);
 
   const [form] = Form.useForm();
   // const { Nombre, onInputChange, formState } = useForm(init);
@@ -39,8 +44,9 @@ const AccionesEstudiantes = ({ open, AbrirModal, CerrarModal }) => {
     console.log("Mes:", mes);
     let fechaNueva = `${year}-${mes}-${dia2}T00:00:00.000Z`;
     console.log(fechaNueva);
-    startCreateStudent(values, fechaNueva);
-    setOpen(!open);
+    startActualizarEstudiante(usuario._id, values, fechaNueva);
+    // startCreateStudent(values, fechaNueva);
+    CerrarModal();
     form.resetFields();
   };
 
@@ -48,12 +54,14 @@ const AccionesEstudiantes = ({ open, AbrirModal, CerrarModal }) => {
     console.log(EstudianteActivo);
     if (EstudianteActivo) {
       form.setFieldsValue({
-        FirstName: data?.Nombre,
-        FirstApellido: EstudianteActivo?.Apellido,
-        FirstSexo: EstudianteActivo?.Sexo,
+        FirstName: usuario?.Nombre,
+        FirstApellido: usuario?.Apellido,
+        FirstSexo: usuario?.Sexo,
+        FirstEstadoe: usuario?.Estado,
+        FirstFecha: dayjs(usuario.FechaNacimeinto),
       });
     }
-  }, []);
+  }, [usuario]);
 
   const items = [
     {
