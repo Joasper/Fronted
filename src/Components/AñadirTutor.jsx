@@ -15,6 +15,13 @@ import {
 import dayjs from "dayjs";
 import { Forma } from "./Form";
 import { useSystemEstudiante } from "../App/Hooks/useSystemEstudiantes";
+import { useSystemTutores } from "../App/Hooks/useSystemTutores";
+import { useDispatch } from "react-redux";
+import {
+  AgregarEstudiantes,
+  EliminarEstudiantes,
+} from "../App/Store/Tutores/TutorSlice";
+import { MdDeleteOutline } from "react-icons/md";
 //import { useForm } from "../App/Hooks/useForm";
 const init = {
   Nombre: "",
@@ -23,9 +30,11 @@ const init = {
 const AnadirTutor = () => {
   const [value, setvalue] = useState("");
   const [Buscar, setBuscar] = useState(false);
-  const [EstudiantesAgregados, setEstudiantesAgregados] = useState("");
+  //const [EstudiantesAgregados, setEstudiantesAgregados] = useState([]);
   const { startCreateStudent, Estudiantes, startGetEstudent } =
     useSystemEstudiante();
+  const { EstudiantesAgregador, CrearTutorEstudiante } = useSystemTutores();
+  const dispatch = useDispatch();
   useEffect(() => {
     startGetEstudent();
   }, []);
@@ -51,10 +60,11 @@ const AnadirTutor = () => {
 
   const onFinish = (values) => {
     console.log(values);
+    CrearTutorEstudiante(values);
 
     //startCreateStudent(values, fechaNueva);
-    // setOpen(!open);
-    // form.resetFields();
+    setOpen(!open);
+    form.resetFields();
   };
   const onInputChange = ({ target }) => {
     console.log(target.value);
@@ -64,21 +74,49 @@ const AnadirTutor = () => {
   const BuscarEstudiante = () => {
     const buscar = Estudiantes.estudiante.find((e) => e.Matricula == value);
     setBuscar(buscar);
-    setEstudiantesAgregados([...EstudiantesAgregados, Buscar]);
-    console.log({ EstudiantesAgregados });
-    console.log(Buscar);
+    console.log({ Buscar });
+  };
+  const AgregarTabla = () => {
+    const buscar = Estudiantes.estudiante.find((e) => e.Matricula == value);
+    if (buscar == undefined) return;
+    setBuscar(buscar);
+    dispatch(AgregarEstudiantes(buscar));
   };
 
   const ColumnsStudents = [
     {
       key: "Matricula",
       title: "MATRICULA",
+      dataIndex: "Matricula",
     },
     {
       key: "Estudiante",
       title: "NOMBRE",
+      dataIndex: "Nombre",
+    },
+    {
+      key: "Apellido",
+      title: "APELLIDO",
+      dataIndex: "Apellido",
+    },
+    {
+      key: "Acciones",
+      title: "ACCIONES",
+      render: (text, payload) => {
+        return (
+          <MdDeleteOutline
+            className="btnDelete"
+            onClick={() => EliminarEstudianteAgregado(text)}
+          />
+        );
+      },
     },
   ];
+
+  const EliminarEstudianteAgregado = (data) => {
+    dispatch(EliminarEstudiantes(data));
+    console.log({ data });
+  };
 
   useEffect(() => {
     if (Buscar) {
@@ -276,7 +314,11 @@ const AnadirTutor = () => {
                       </Form.Item>
                     </div>
                     <div className="botonAgregar">
-                      <Button type="primary" size="large">
+                      <Button
+                        type="primary"
+                        size="large"
+                        onClick={AgregarTabla}
+                      >
                         Agregar
                       </Button>
                     </div>
@@ -288,7 +330,11 @@ const AnadirTutor = () => {
             </div>
           </Form>
           <div className={`${Buscar ? "tableTrue" : "tableStudent"}`}>
-            <Table columns={ColumnsStudents} />
+            <Table
+              columns={ColumnsStudents}
+              dataSource={EstudiantesAgregador || []}
+              pagination={false}
+            />
           </div>
         </Space>
       ),

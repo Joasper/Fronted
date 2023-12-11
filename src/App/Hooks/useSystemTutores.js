@@ -4,7 +4,9 @@ import { GetTutores } from "../Store/Tutores/TutorSlice";
 
 export const useSystemTutores = () => {
   const dispatch = useDispatch();
-  const { Tutores } = useSelector((state) => state.tutores);
+  const { Tutores, EstudiantesAgregador } = useSelector(
+    (state) => state.tutores
+  );
 
   const startGetTutores = async () => {
     try {
@@ -16,11 +18,35 @@ export const useSystemTutores = () => {
     }
   };
 
+  const CrearTutorEstudiante = async (data) => {
+    console.log({ data, EstudiantesAgregador });
+    const idsEstudiantes = EstudiantesAgregador.map((e) => {
+      return e._id;
+    });
+
+    try {
+      const res = await BD.post("/tutores", {
+        Cedula: data?.FirstCedula,
+        Nombre: data?.FirstName,
+        Apellido: data?.FirstApellido,
+        Correo: data?.FirstCorreo,
+        Telefono: data?.FirstTelefono,
+        Estudiantes: idsEstudiantes,
+      });
+      startGetTutores();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     //*PROPIEDADES
     Tutores,
+    EstudiantesAgregador,
 
     //*METODOS
     startGetTutores,
+    CrearTutorEstudiante,
   };
 };

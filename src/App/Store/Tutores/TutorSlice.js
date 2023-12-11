@@ -6,6 +6,7 @@ export const TutorSlice = createSlice({
   //declaracion del estado inicial de las variables
   initialState: {
     Tutores: [],
+    EstudiantesAgregador: [],
   },
   //funciones que modifican el estado
   reducers: {
@@ -13,7 +14,16 @@ export const TutorSlice = createSlice({
     GetTutores: (state, { payload }) => {
       state.Tutores = payload;
     },
+    AgregarEstudiantes: (state, { payload }) => {
+      state.EstudiantesAgregador = [...state.EstudiantesAgregador, payload];
+    },
+    EliminarEstudiantes: (state, { payload }) => {
+      state.EstudiantesAgregador = state.EstudiantesAgregador.filter(
+        (e) => e._id != payload._id
+      );
+    },
   },
 });
 
-export const { GetTutores } = TutorSlice.actions;
+export const { GetTutores, AgregarEstudiantes, EliminarEstudiantes } =
+  TutorSlice.actions;

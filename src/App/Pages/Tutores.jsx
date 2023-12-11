@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSystemTutores } from "../Hooks/useSystemTutores";
 import { MdManageAccounts } from "react-icons/md";
 import AnadirTutor from "../../Components/AñadirTutor";
+import { IoEyeSharp } from "react-icons/io5";
 
 export const Tutores = () => {
   const { startGetTutores, Tutores } = useSystemTutores();
@@ -36,6 +37,13 @@ export const Tutores = () => {
       key: "Telefono",
       title: "TELEFONO",
       dataIndex: "Telefono",
+    },
+    {
+      key: "Estudiante",
+      title: "ESTUDIANTES",
+      render: (text, record) => {
+        return <IoEyeSharp className="icon-estu" />;
+      },
     },
 
     {

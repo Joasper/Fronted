@@ -48,10 +48,10 @@
   font-size: 20px;
 }
 .modal {
-  width: 800px !important;
+  width: 00px !important;
 }
 .tutores-modal {
-  width: 1000px !important;
+  width: 1100px !important;
 }
 .accionesmodal {
   width: 400px !important;
@@ -152,11 +152,19 @@
 .tableStudent {
   margin-top: 100px !important;
   position: relative !important;
-  left: 130px !important;
+  left: 90px !important;
 }
 
 .tableTrue {
   position: relative !important;
   bottom: 230px !important;
-  left: 130px !important;
+  left: 70px !important;
+}
+
+.btnDelete {
+  font-size: 25px !important;
+  color: red !important;
+  cursor: pointer;
+  position: relative;
+  left: 20px !important;
 }
